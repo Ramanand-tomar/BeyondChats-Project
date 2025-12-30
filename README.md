@@ -2,6 +2,8 @@
 
 A full-stack web application that scrapes, manages, and enhances articles using AI. This platform allows users to fetch articles from URLs, enhance them with AI-powered rewrites using Google's Gemini API, and display both original and enhanced versions side-by-side.
 
+# ([See demonstration video](https://drive.google.com/file/d/1KXJg6XjUwX6TYGTSLGAqQg0Il8oohP9o/view?usp=drive_link))
+
 ## 🌟 Features
 
 ### Core Features
