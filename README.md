@@ -25,7 +25,38 @@ A full-stack web application that scrapes, manages, and enhances articles using 
 - **References Section**: Show all cited sources with numbered links
 - **Badge System**: Visual indicators for article type (Original/AI Enhanced)
 
-## 🛠️ Tech Stack
+## � Screenshots & Architecture
+
+### Application Interface
+
+#### Home Page - Article Discovery
+![Home Page](frontend/public/screenshots/home-page.png)
+*Main dashboard showing AI Enhanced and Original article counts with URL scraper integration*
+
+#### Article Detail View - With Google Sources
+![Article Detail](frontend/public/screenshots/article-detail.png)
+*AI Enhanced article displaying Google search sources and rewritten content*
+
+#### All Articles - Database Overview
+![All Articles View](frontend/public/screenshots/all-articles.png)
+*Complete article database with filtering, search, and sorting capabilities*
+
+### System Architecture
+
+#### Backend Processing Flow
+![Architecture Diagram](frontend/public/diagrams/backend-architecture.png)
+*Complete data flow: Article ingestion → Content normalization → LLM enhancement → Storage → Frontend rendering*
+
+**Architecture Flow:**
+1. **External Articles (Ingestion)** - Content from URLs or BeyondChats blog
+2. **Content Normalization & Truncation** - Prepare content for LLM processing
+3. **AI Service Decision** - Check service availability and handle failures gracefully
+4. **Google Gemini LLM** - Streaming API for intelligent article rewriting
+5. **Storage Handler** - Manage enhanced content storage
+6. **MongoDB** - Persistent data storage for articles
+7. **Frontend Application** - React-based UI for article browsing and management
+
+## �🛠️ Tech Stack
 
 ### Frontend
 - **Framework**: React 18 with TypeScript
