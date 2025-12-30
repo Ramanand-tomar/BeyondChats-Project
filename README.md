@@ -30,21 +30,21 @@ A full-stack web application that scrapes, manages, and enhances articles using 
 ### Application Interface
 
 #### Home Page - Article Discovery
-![Home Page](frontend/public/screenshots/homePage.png)
+![Home Page](frontend/public/homePage.png)
 *Main dashboard showing AI Enhanced and Original article counts with URL scraper integration*
 
 #### Article Detail View - With Google Sources
-![Article Detail](frontend/public/screenshots/Article.png)
+![Article Detail](frontend/public/Article.png)
 *AI Enhanced article displaying Google search sources and rewritten content*
 
 #### All Articles - Database Overview
-![All Articles View](frontend/public/screenshots/AllArticles.png)
+![All Articles View](frontend/public/AllArticles.png)
 *Complete article database with filtering, search, and sorting capabilities*
 
 ### System Architecture
 
 #### Backend Processing Flow
-![Architecture Diagram](frontend/public/diagrams/backend-architecture.png)
+![Architecture Diagram](frontend/public/backend-architecture.png)
 *Complete data flow: Article ingestion → Content normalization → LLM enhancement → Storage → Frontend rendering*
 
 **Architecture Flow:**
