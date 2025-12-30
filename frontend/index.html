@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" class="light" style="color-scheme: light">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BeyondChats Articles - AI-Enhanced Content Platform</title>
+    <meta name="description" content="Discover insightful articles enhanced by AI. Browse original and AI-updated content on BeyondChats Articles." />
+    <meta name="author" content="BeyondChats" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="/" />
+
+    <meta property="og:title" content="BeyondChats Articles - AI-Enhanced Content" />
+    <meta property="og:description" content="Discover insightful articles enhanced by AI. Browse original and AI-updated content." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@BeyondChats" />
+    <meta name="twitter:title" content="BeyondChats Articles" />
+    <meta name="twitter:description" content="Discover insightful articles enhanced by AI." />
+    <meta name="twitter:image" content="" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
