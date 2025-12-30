@@ -311,6 +311,57 @@ backend/src/
 
 ## 🔧 Configuration
 
+### LLM Prompt Configuration
+
+#### Gemini AI Rewrite Prompt
+
+The application uses Google Gemini AI to enhance articles with the following system instruction:
+
+```
+You are a professional content editor and SEO writer.
+
+TASK:
+Rewrite the ORIGINAL ARTICLE.
+
+RULES:
+- Improve clarity, structure, and readability
+- Match reference quality (no copying)
+- Keep facts intact
+- Use HTML only: <h2>, <h3>, <p>, <ul>, <li>
+- No markdown
+- No <html>, <body>, <head>
+- Output ONLY clean HTML
+```
+
+#### LLM Configuration Parameters
+
+```javascript
+{
+  model: "gemini-3-flash-preview",
+  temperature: 0.7,           // Controls creativity (0.0-1.0)
+  maxOutputTokens: 3500,      // Maximum response length
+  thinkingLevel: "HIGH"       // Deep reasoning for better rewrites
+}
+```
+
+**How it works:**
+1. User initiates article enhancement from the UI
+2. System fetches top 2 Google search results as reference articles
+3. Original article + 2 reference articles are sent to Gemini
+4. Gemini rewrites the original article using reference quality as guide
+5. Enhanced HTML is cleaned and saved to UpdatedArticles collection
+6. User can view both original and enhanced versions side-by-side
+
+**Input Truncation (for cost optimization):**
+- Original Article: Max 2200 characters
+- Reference Articles: Max 1200 characters each
+
+**Output Processing:**
+- Removes markdown code blocks (````html`)
+- Strips HTML structural tags (`<html>`, `<body>`, `<head>`, `<!DOCTYPE>`)
+- Cleans excessive line breaks (3+ → 2)
+- Validates non-empty response, falls back to original if failed
+
 ### Database Models
 
 #### Article (Original)

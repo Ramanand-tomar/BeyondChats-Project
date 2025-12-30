@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Database, Search, Filter, RefreshCw, Sparkles, FileText, Calendar, ExternalLink } from 'lucide-react';
-import { fetchArticles, fetchUpdatedArticles, Article } from '@/lib/api';
+import { fetchArticles, Article } from '@/lib/api';
 import { Header } from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,9 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 const AllArticles = () => {
-  const [originalArticles, setOriginalArticles] = useState<Article[]>([]);
-  const [updatedArticles, setUpdatedArticles] = useState<Article[]>([]);
-  const [allArticles, setAllArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,13 +22,8 @@ const AllArticles = () => {
     setError(null);
     
     try {
-      const [original, updated] = await Promise.all([
-        fetchArticles(),
-        fetchUpdatedArticles()
-      ]);
-      setOriginalArticles(original);
-      setUpdatedArticles(updated);
-      setAllArticles([...original, ...updated]);
+      const data = await fetchArticles();
+      setArticles(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch articles');
     } finally {
@@ -43,7 +36,7 @@ const AllArticles = () => {
   }, []);
 
   useEffect(() => {
-    let result = [...allArticles];
+    let result = [...articles];
     
     // Filter by search query
     if (searchQuery) {
@@ -72,14 +65,13 @@ const AllArticles = () => {
     });
     
     setFilteredArticles(result);
-  }, [allArticles, searchQuery, filterType, sortBy]);
+  }, [articles, searchQuery, filterType, sortBy]);
 
   const stats = {
-    total: allArticles.length,
-    updated: updatedArticles.length,
-    original: originalArticles.length,
+    total: articles.length,
+    updated: articles.filter(a => a.isUpdated).length,
+    original: articles.filter(a => !a.isUpdated).length,
   };
-
 
   return (
     <div className="min-h-screen bg-background">
@@ -193,7 +185,7 @@ const AllArticles = () => {
 
         {/* Results count */}
         <p className="text-sm text-muted-foreground mb-4">
-          Showing {filteredArticles.length} of {allArticles.length} articles
+          Showing {filteredArticles.length} of {articles.length} articles
         </p>
 
         {/* Articles Table/List */}
@@ -263,19 +255,12 @@ const AllArticles = () => {
                     </div>
                   </div>
                   
-                  {article.isUpdated ? (
-                    <Badge 
-                      variant="secondary"
-                      className="gap-1 bg-accent/10 text-accent border-accent/20"
-                    >
-                      <Sparkles className="h-3 w-3" />
-                      AI Enhanced
-                    </Badge>
-                  ) : (
-                    <Badge variant="secondary" className="bg-muted text-muted-foreground border-border/50">
-                      Original
-                    </Badge>
-                  )}
+                  <Badge 
+                    variant={article.isUpdated ? 'default' : 'secondary'}
+                    className={article.isUpdated ? 'bg-accent text-accent-foreground' : ''}
+                  >
+                    {article.isUpdated ? 'AI Enhanced' : 'Original'}
+                  </Badge>
                 </div>
               </Card>
             ))
