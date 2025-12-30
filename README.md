@@ -40,7 +40,7 @@ A full-stack web application that scrapes, manages, and enhances articles using 
 - **Framework**: Express.js
 - **Database**: MongoDB with Mongoose ODM
 - **API Style**: RESTful
-- **Authentication**: API Key-based (GEMINI_API_KEY, SERPER_API_KEY)
+- **External Services**: API Key-based (GEMINI_API_KEY, SERPER_API_KEY)
 
 ### External APIs
 - **LLM**: Google Gemini 2.5 Flash API (AI article rewriting)
