@@ -44,8 +44,8 @@ A full-stack web application that scrapes, manages, and enhances articles using 
 ### System Architecture
 
 #### Backend Processing Flow
-![Architecture Diagram](frontend/public/backend-architecture.png)
-*Complete data flow: Article ingestion → Content normalization → LLM enhancement → Storage → Frontend rendering*
+![Architecture Diagram](frontend/public/Architecture_Image.png)
+
 
 **Architecture Flow:**
 1. **External Articles (Ingestion)** - Content from URLs or BeyondChats blog
